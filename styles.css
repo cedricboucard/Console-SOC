@@ -1,0 +1,183 @@
+/* ==========================================================================
+   1. STYLES GÉNÉRAUX DE LA PAGE (Console SOC)
+   ========================================================================== */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #0f131a; /* Bleu-noir très sombre du fond */
+    color: #fff;               /* Texte principal en blanc pur */
+    margin: 0;                 /* Supprime les marges par défaut du navigateur */
+    padding: 20px;             /* Espace de respiration sur les côtés de l'écran */
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;        /* Réduit l'espace sous le grand titre */
+}
+
+.subtitle {
+    font-size: 1.2em;
+    margin-top: 0;             /* Supprime la marge du haut pour coller au h1 */
+    color: #ccc;               /* Gris clair pour créer une hiérarchie visuelle */
+}
+
+.status {
+    color: rgba(66, 158, 66, 0.97); /* Vert informatique pour le statut OK */
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   2. STRUCTURE ET ALIGNEMENT DES ALERTES (Page de fond)
+   ========================================================================== */
+
+/* Conteneur global de chaque ligne d'alerte */
+.alerte {
+    background-color: #161b22;  /* Fond gris-bleu un peu plus clair que le body */
+    padding: 15px;              /* Espace interne dans la boîte */
+    border-radius: 6px;         /* Coins légèrement arrondis */
+    border: 1px solid #232936;  /* Bordure fine pour délimiter les blocs */
+}
+
+/* Comportement commun pour les trois types de badges (Critique, Warning, Info) */
+.alerte-titre-critique, 
+.alerte-titre-warning, 
+.alerte-titre-info {
+    display: inline-block;     /* Force l'alignement horizontal côte à côte */
+    vertical-align: middle;    /* Aligne verticalement le badge au centre de la ligne */
+    width: 15%;                /* Alloue 15% de la largeur totale */
+    margin: 0;                 /* Reset des marges par défaut du h3 */
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Couleurs spécifiques selon la gravité de l'alerte */
+.alerte-titre-critique { color: #ff3333; } /* Rouge */
+.alerte-titre-warning  { color: #ff9900; } /* Orange */
+.alerte-titre-info     { color: #0099ff; } /* Bleu */
+
+/* La description de l'incident (Le texte du milieu) */
+.alerte-description {
+    display: inline-block;     /* S'aligne à côté du badge */
+    vertical-align: middle;    /* Centrage vertical */
+    width: 65%;                /* Prend la majorité de la place sur la ligne */
+    margin: 0;                 /* Reset des marges par défaut du p */
+    font-size: 0.95rem;
+    color: #e1e7f0;            /* Blanc cassé doux pour les yeux */
+}
+
+/* L'horodatage (Le texte tout à droite) */
+.alerte-heure {
+    display: inline-block;     /* S'aligne à côté de la description */
+    vertical-align: middle;    /* Centrage vertical */
+    width: 15%;                /* Prend les 15% restants de la ligne */
+    margin: 0;                 /* Reset des marges par défaut du p */
+    text-align: right;         /* Pousse le texte au bout à droite */
+    font-size: 0.9em;
+    color: #707e94;            /* Gris neutre discret pour l'heure */
+}
+
+/* Modificateur pour l'alerte Critique transformée en lien */
+.alerte-cliquable {
+    text-decoration: none;     /* Enlève le soulignement classique des liens */
+    display: block;            /* Conserve son comportement de grand bloc cliquable */
+}
+
+/* ==========================================================================
+   3. MÉCANISME ET DESIGN DE LA MODALE D'INVESTIGATION
+   ========================================================================== */
+
+/* L'Overlay : Le fond sombre qui couvre et bloque tout l'écran */
+.soc-overlay {
+    position: fixed;           /* Reste fixé à l'écran même si on scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 15, 30, 0.85); /* Noir-bleuté transparent */
+    z-index: 1000;             /* S'assure de passer devant la page de fond */
+    
+    display: none;             /* CACHÉ PAR DÉFAUT */
+}
+
+/* LA MAGIE : Quand l'ID de la modale (#cyber-modal) est détecté dans l'URL */
+.soc-overlay:target {
+    display: block;            /* Devient visible */
+}
+
+/* La boîte blanche (Fenêtre flottante au centre) */
+.soc-box {
+    background-color: #161a22; /* Fond sombre harmonisé avec les alertes */
+    color: white;
+    width: 90%;                /* Fluide sur les écrans mobiles */
+    max-width: 400px;          /* Limite la largeur sur les grands écrans */
+    margin: 150px auto;        /* Marges : 150px du haut, centré horizontalement (auto) */
+    padding: 30px;             /* Espace interne généreux */
+    border-radius: 8px;        /* Coins arrondis */
+    border: 1px solid #232936;
+    position: relative;        /* Point de repère obligatoire pour le positionnement de la croix */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Ombre portée diffuse */
+}
+
+/* Le bouton de fermeture rapide (La croix ×) */
+.close-x {
+    position: absolute;        /* S'extrait du flux pour se placer librement */
+    top: 15px;                 /* À 15px du bord supérieur de la boîte */
+    right: 20px;               /* À 20px du bord droit de la boîte */
+    color: #707e94;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 1;            /* Évite que la croix ne décale la hauteur */
+}
+
+/* Effet au survol de la croix */
+.close-x:hover {
+    color: #ffffff;            /* Devient blanche pure quand la souris passe dessus */
+}
+
+/* Petit badge de criticité dans la modale */
+.soc-badge {
+    background-color: #ff3333; /* Rouge d'alerte */
+    font-size: 0.75em;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+/* Les zones d'affichage des données techniques (IP, Serveur) */
+.soc-data {
+    background-color: #0f131a; /* Fond encore plus sombre pour faire ressortir les infos */
+    padding: 12px;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-family: monospace;    /* Police à chasse fixe style "Terminal / Logs" */
+    font-size: 0.9em;
+}
+
+/* Conteneur des deux boutons en bas de la modale */
+.soc-buttons {
+    margin-top: 25px;
+    text-align: right;         /* Aligne les boutons vers la droite */
+}
+
+/* Base commune pour les boutons d'action */
+.btn-gray, .btn-red {
+    display: inline-block;     /* Se placent côte à côte */
+    padding: 10px 18px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-left: 10px;         /* Espace horizontal entre les deux boutons */
+}
+
+/* Bouton Faux Positif (Action secondaire neutre) */
+.btn-gray {
+    background-color: #2a3241;
+    color: #cbd5e1;
+}
+
+/* Bouton Isoler la machine (Action principale critique) */
+.btn-red {
+    background-color: #ff3333;
+    color: white;
+}

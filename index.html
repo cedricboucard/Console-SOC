@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Console SOC - Alertes Récentes</h1>
+        <p class="subtitle">Statut du système : <span class="status">Opérationnel</span>
+        </p>
+    </header>
+    <main>
+        <section class="critique">
+            <a href="#cyber-modal" class="alerte alerte-cliquable">
+                <h3 class="alerte-titre-critique">Critique</h3>
+                <p class="alerte-description">Brute-force SSH detecté sur Web-Server-01</p>
+                <p class="alerte-heure">Il y a 2 minutes</p>
+            </a>
+        </section>
+        <section class="warning">
+            <article class="alerte">
+                <h3 class="alerte-titre-warning">WARNING</h3>
+                <p class="alerte-description">Utilisation CPU élevée (92%) sur Base-de-données-02</p>
+                <p class="alerte-heure">Il y a 15 minutes</p>
+            </article>
+        </section>
+        <section class="info">
+            <article class="alerte">
+                <h3 class="alerte-titre-info">INFO</h3>
+                <p class="alerte-description">Mise à jour système réussie sur Firewall principal</p>
+                <p class="alerte-heure">Il y a 1 heure</p>
+            </article>
+        </section>
+    </main>
+
+    <div id="cyber-modal" class="soc-overlay">
+        <div class="soc-box">
+            <a href="#" class="close-x">x</a>
+
+            <span class="soc-badge">CRITIQUE</span>
+            <h2>Enquête d'Alerte</h2>
+
+            <p class="soc-data"><strong>IP Source:</strong> 192.168.1.105</p>
+            <p class="soc-data"><strong>Cible :</strong> Web-Server-01</p>
+
+            <div class="soc-buttons">
+                <a href="#" class="btn-gray">Faux positif</a>
+                <a href="#" class="btn-red">Isoler la machine</a>
+            </div>
+
+        </div>
+    </div>
