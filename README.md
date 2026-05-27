@@ -12,3 +12,12 @@ Ce projet est une maquette fonctionnelle et minimaliste d'un tableau de bord de 
 
 - **HTML5** : Structure sémantique (utilisation des balises `<header>`, `<main>`, `<section>`, et `<article>`).
 - **CSS3** : Alignements horizontaux via `inline-block`, gestion des superpositions (`position: fixed`) et gestion des états graphiques (`:target`).
+
+## Screenshot 
+![screenshot](image.png)
+
+![screenshot](image-1.png)
+
+## 🚀 Live Demo
+
+https://cedricboucard.github.io/Console-SOC/#
